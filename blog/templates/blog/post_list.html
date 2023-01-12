@@ -1,49 +1,13 @@
-{% load static %}
-<html>
-    <head>
-        <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500&display=swap" rel="stylesheet">
-        <title>후안무치 html</title>
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-        <link rel="stylesheet" href="{% static 'css/blog.css' %}">
-    </head>
-    <body>
-        <div class="page-header">
-            <h1><a href="/">후안무치의 글</a></h1>
-        </div>        
+{% extends 'blog/base.html' %}
 
-        <div class="content container">
-            <div class="row">
-                <div class="col-md-8">
-                    <div class="post">
-                        <h2>2023. 01. 09. Juan Mucci 이야기</h2>
-                        <p><br />이거 뭐 블로그를 적어봤어야 알지<br />
-                            장고를 배우려고 하긴 했는데 HTML에다가 CSS까지 할거라고는 생각을 못하긴 했는데<br />
-                            플러터도 같이 배우지 않을까 한다. 뭐 어쩌겠나 해야지<br />
-                            밥벌어 먹고 살 생각하는게 이렇게 힘들다.<br />
-                            그래도 배포는 해봤다는것에 의의를 두는것이 아닐까<br /><br />
-                            참 오늘은 부산살때 자주 가던 카페 사장님을 오랜만에 뵈었는데<br />
-                            시간 참 잘 가기는 하는구나 생각이 들더라<br />
-                            에티오피아가 참 묵직하게 느껴지는 하루였다.<br />
-                            커피는 기분따라 많이 다르다는 사실을 재차 느끼고 간다.<br />
-                    </div>
-                    
-                    <!-- 블로그 글에 쓰는 본문내용. 나중에 다시 살려야지!
-                        
-                        {% for post in posts %}
-                        <div class="post">
-                            <div class="date">
-                                <p>published: {{ post.published_date }}</p>
-                            </div>
-                            <h1><a href="">{{ post.title }}</a></h1>
-                            <p>{{ post.text|linebreaksbr }}</p>
-                        </div>
-                    {% endfor %}
-                    -->
-                </div>
+{% block content %}
+    {% for post in posts %}
+        <div class="post">
+            <div class="date">
+                {{ post.published_date }}
             </div>
+            <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+            <p>{{ post.text|linebreaksbr }}</p>
         </div>
-    </body>
-
-
-</html>
+    {% endfor %}
+{% endblock %}
